@@ -9,5 +9,5 @@ const pool = new Pool({
     },
     connectionTimeoutMillis: 15000,
 });
-console.log(typeof process.env.DATABASE_URL)
+
 export default pool;
