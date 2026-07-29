@@ -1,0 +1,13 @@
+services:
+  backend:
+    build: ./backend
+    ports: 
+      - "${PORT}:${PORT}"
+    environment:
+      - PORT=${PORT}
+      - DATABASE_URL=${DATABASE_URL}
+    env_file:
+      - .env
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
