@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import pool from "./conexao";
 
 export const autenticar = async (req, res, next) =>{
     try {
@@ -15,6 +16,12 @@ export const autenticar = async (req, res, next) =>{
         }
 
         const dadosToken = jwt.verify(token, process.env.JWT_SECRET)
+
+        const usuarioValido = await pool.query("SELECT * FROM alunos where id = $1", [dadosToken.id])
+
+        if(usuarioValido.rowCount === 0){
+            res.status(401).json({message: "Usuario nao encontrado"})
+        }
 
         req.usuario = dadosToken;
 

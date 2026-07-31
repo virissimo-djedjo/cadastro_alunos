@@ -12,6 +12,10 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
+app.use("/alunos", (req, res)=>{
+    res.send("alunos")
+})
+
 app.use("/", router)
 
 const conetado = async ()=>{
