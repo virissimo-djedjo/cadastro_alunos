@@ -12,8 +12,8 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-app.use("/alunos", (req, res)=>{
-    res.send("alunos")
+app.use("/teste", (req, res)=>{
+    res.send("Rota de teste de")
 })
 
 app.use("/", router)

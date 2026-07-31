@@ -1,6 +1,7 @@
 services:
   backend:
     build: ./backend
+    restart: always
     ports: 
       - "${PORT}:${PORT}"
     environment:

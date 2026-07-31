@@ -82,5 +82,21 @@ router.get("/perfil", autenticar, async (req, res)=>{
   res.json(aluno.rows)
 })
 
+router.get("/alunos", async (req, res)=>{
+  try {
+    const aluno = await pool.query("SELECT id, nome, email FROM alunos")
+    if(aluno.rowCount === 0){
+      return res.status(400).json({message: "Nenhum aluno encontrado"})
+    }
+
+  res.status(200).json({dados: aluno.rows})
+  } catch (erro) {
+    console.log(erro.message)
+
+    return res.status(500).json({message: "Erro ao procurar alunos"})
+  }
+})
+
+
 
 export default router;

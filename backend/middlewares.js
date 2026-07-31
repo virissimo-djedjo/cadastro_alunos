@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import pool from "./conexao";
+import pool from "./conexao.js";
 
 export const autenticar = async (req, res, next) =>{
     try {
