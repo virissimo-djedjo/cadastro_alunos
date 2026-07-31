@@ -76,7 +76,7 @@ router.post("/login", async (req, res) => {
       .json({ token: token, dados: { id: usuario.id, email: usuario.email } });
   } catch (erro) {
     console.error(erro.message);
-    return res.status(500).json("erro ao realizar login");
+    return res.status(500).json(erro.message);
   }
 });
 
@@ -88,7 +88,7 @@ router.get("/perfil", autenticar, async (req, res) => {
   res.json(aluno.rows);
 });
 
-router.get("/alunos", async (req, res) => {
+router.get("/alunos", autenticar, async (req, res) => {
   try {
     const aluno = await pool.query("SELECT id, nome, email FROM alunos");
     if (aluno.rowCount === 0) {
@@ -103,7 +103,7 @@ router.get("/alunos", async (req, res) => {
   }
 });
 
-router.get("/alunos/:id", async (req, res) => {
+router.get("/alunos/:id", autenticar, async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -121,7 +121,7 @@ router.get("/alunos/:id", async (req, res) => {
   }
 });
 
-router.delete("/alunos/:id", async (req, res) => {
+router.delete("/alunos/:id", autenticar, async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -139,7 +139,7 @@ router.delete("/alunos/:id", async (req, res) => {
   }
 });
 
-router.put("/alunos/:id", async (req, res)=>{
+router.put("/alunos/:id", autenticar, async (req, res)=>{
    
   const { id } = req.params
   const { nome, email, password } = req.body
